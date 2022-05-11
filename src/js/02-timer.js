@@ -1,3 +1,4 @@
+import Notiflix from 'notiflix';
 import flatpickr from "flatpickr";
 import "flatpickr/dist/flatpickr.min.css";
 
@@ -12,15 +13,17 @@ const refs = {
 const TIMER_DELAY = 1000;
 let intervalId = null;
 
+btnOff ()
+
 const options = {
   enableTime: true,
   time_24hr: true,
   defaultDate: new Date(),
   minuteIncrement: 1,
-    onClose(selectedDates) {               
+    onClose(selectedDates) {          
         if (options.defaultDate.getTime() > selectedDates[0].getTime() ) {
             refs.startBtn.disabled = true; 
-            alert`Please choose a date in the future`;
+            Notiflix.Notify.failure(`Please choose a date in the future`);
             return
         } else {
             refs.startBtn.disabled = false;
@@ -66,5 +69,8 @@ function convertMs(ms) {
   const minutes = pad(Math.floor(((ms % day) % hour) / minute));  
   const seconds = pad(Math.floor((((ms % day) % hour) % minute) / second));
     return { days, hours, minutes, seconds };
+}
+function btnOff () {
+refs.startBtn.disabled = true;
 }
 
