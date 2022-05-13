@@ -6,11 +6,6 @@ const refs = {
   step: document.querySelector('input[name="step"]'), 
   amount: document.querySelector('input[name="amount"]'), 
 };
-let delay = null;
-let step = null;
-let amount = null;
-let number = 0;
-let intervalId = null;
 
 refs.form.addEventListener('submit', onFormInput);
 
@@ -39,7 +34,7 @@ function createPromise(position, delay) {
 }
 
 function promiseDefine({ delay, step, amount }) {
-  number = delay;
+  let number = delay;
   for (let i = 1; i <= amount; i++) {
     createPromise(i, number)      
       .then(({ position, delay }) => {    
